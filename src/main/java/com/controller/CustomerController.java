@@ -38,7 +38,7 @@ public class CustomerController {
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     @ResponseBody
-    public BaseResponse<List<Customer>>  insert(@RequestBody @Validated Customer customer, BindingResult result) {
+    public BaseResponse<List<Customer>>  insert(@RequestBody @Valid Customer customer, BindingResult result) {
         if (result.hasErrors()) {
             List<ObjectError> errorList = result.getAllErrors();
             for (ObjectError error : errorList) {

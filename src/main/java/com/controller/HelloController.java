@@ -84,6 +84,5 @@ public class HelloController {
         sbHtml.append("<!doctype html><html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">");
         sbHtml.append("<title>支付宝即时到账交易接口</title></head><body>"+ "123456"+"</body></html>");
         return sbHtml.toString();
-
     }
 }
