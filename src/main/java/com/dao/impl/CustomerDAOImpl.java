@@ -4,7 +4,10 @@ import com.dao.CustomerDAO;
 import com.model.Customer;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
+import javax.sql.DataSource;
 import java.util.List;
 import java.util.Map;
 
@@ -21,11 +24,8 @@ import java.util.Map;
  * 通过扩展 JdbcDaoSupport，设置数据源，并且 JdbcTemplate 在你的类中不再是必需的，只需要正确的数据源注入JdbcCustomerDAO。
  * 可以使用 getJdbcTemplate()方法得到 JdbcTemplate。
  * */
-
-
-public class JdbcCustomerDAO extends JdbcDaoSupport implements CustomerDAO {
-    @Override
-    //no need to set datasource here
+@Component("JdbcCustomerDAO")
+public class CustomerDAOImpl extends JdbcDaoSupport implements CustomerDAO {
     public void insert(Customer customer) {
 
         String sql = "INSERT INTO CUSTOMER " +
@@ -36,7 +36,6 @@ public class JdbcCustomerDAO extends JdbcDaoSupport implements CustomerDAO {
         });
     }
 
-    @Override
     public Customer findByCustomerId(int custId) {
         String sql = "SELECT * FROM CUSTOMER WHERE CUST_ID = ?";
         Customer customer = null;

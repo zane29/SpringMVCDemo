@@ -1,6 +1,5 @@
 package com.model;
 
-import com.sun.istack.internal.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
 

@@ -4,10 +4,11 @@ import com.dao.CustomerDAO;
 import com.model.Customer;
 import com.utils.ReturnInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -23,9 +24,12 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value = "/customer")
+@Scope("prototype")//将其设置为多例模式。
 public class CustomerController {
     @Autowired
     Customer customer;
+
+//    @Qualifier("CustomerDAOImpl")
     @Autowired
     CustomerDAO customerDAO;
 
