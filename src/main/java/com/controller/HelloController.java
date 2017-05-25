@@ -26,22 +26,23 @@ import java.util.Map;
 @RequestMapping(value = "/")
 public class HelloController {
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)//    http://localhost:8080/
     public String Hello(ModelMap model) {
         model.addAttribute("msg", "Spring MVC Hello World");
         model.addAttribute("name", "国迈");
         return "hello";
     }
 
-    /*        对于ModelAndView构造函数可以指定返回页面的名称*/
-    @RequestMapping(value = "/index1", method = RequestMethod.GET)
+    /*对于ModelAndView构造函数可以指定返回页面的名称*/
+    @RequestMapping(value = "/index1", method = RequestMethod.GET)//http://localhost:8080/index1
     public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView("/hello");
-        modelAndView.addObject("name", "xxx");
+        modelAndView.addObject("name", "周海明");
         return modelAndView;
     }
 
-    // 可以通过setViewName方法来设置所需要跳转的页面
+    /*可以通过setViewName方法来设置所需要跳转的页面*/
+    //http://localhost:8080/index2
     @RequestMapping(value = "/index2", method = RequestMethod.GET)
     public ModelAndView index2() {
         ModelAndView modelAndView = new ModelAndView();
@@ -51,10 +52,11 @@ public class HelloController {
         return modelAndView;
     }
 
-    //  在Servlet中，我们是可以直接forward或者redirecit到html页面，所以我们也可以如下在springmvc中返回到html页面
+    /*在Servlet中，我们是可以直接forward或者redirecit到html页面，所以我们也可以如下在springmvc中返回到html页面*/
+    //http://localhost:8080/htmlView
     @RequestMapping(value = "/htmlView")
     public void htmlView(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("index1").forward(request, response);
+        request.getRequestDispatcher("index2").forward(request, response);
 //        response.sendRedirect("http://www.baidu.com");
     }
 
@@ -75,13 +77,11 @@ public class HelloController {
         sbHtml.append("<title>支付宝即时到账交易接口</title></head><body>" + "123456" + "</body></html>");
         writer.write(sbHtml.toString());
     }
-
 /*
      * String
      * 指定返回的视图页面名称，结合设置的返回地址路径加上页面名称后缀即可访问到。
      * 注意：如果方法声明了注解@ResponseBody ，则会直接将返回值输出到页面。
     */
-
 
     @RequestMapping(value = "/index5", method = RequestMethod.GET, produces = "text/html")
     @ResponseBody

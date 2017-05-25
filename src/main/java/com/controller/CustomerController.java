@@ -2,6 +2,7 @@ package com.controller;
 
 import com.dao.CustomerDAO;
 import com.model.Customer;
+import com.model.Message;
 import com.utils.ReturnInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -29,7 +31,7 @@ public class CustomerController {
     @Autowired
     Customer customer;
 
-//    @Qualifier("CustomerDAOImpl")
+    @Qualifier("CustomerDAOImpl")
     @Autowired
     CustomerDAO customerDAO;
 
@@ -38,6 +40,18 @@ public class CustomerController {
     public Customer get(@RequestParam("id") int id) {
         customer =customerDAO.findByCustomerId(id);
         return customer;//返回{"custId":1,"name":"yiibai","age":29}
+    }
+    //http://localhost:8080/customer/getmessage?name=zhouhaiming&sex=man&age=22
+    @RequestMapping(value = "/getmessage", method = RequestMethod.GET)
+    @ResponseBody
+    public Message getmessage(@ModelAttribute("message") Message message) {
+        return message;//返回{"name":"zhouhaiming","sex":"man","age":"22"}
+    }
+
+    //http://localhost:8080/customer/getmessagepage?name=zhouhaiming&sex=man&age=22
+    @RequestMapping(value = "/getmessagepage", method = RequestMethod.GET)
+    public String getmessagepage(@ModelAttribute("message") Message message) {
+        return "message";//返回message.jps 页面
     }
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)

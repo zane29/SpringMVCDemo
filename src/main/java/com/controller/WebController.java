@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Date: 2017/3/27
  * Time: 13:07
  */
+
+/**
+* 重定向到静态资源
+* */
 @Controller
 @RequestMapping(value = "/HelloWeb")
 public class WebController {

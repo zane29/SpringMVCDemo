@@ -1,27 +1,35 @@
-package com.controller.response;
+package com.model;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * Created with IntelliJ IDEA.
- * User: 周海明
- * Date: 2017/3/27
- * Time: 16:19
+ * Created by zhouhaiming on 2017-4-27 16:02
+ * Email: dg_chow@163.com
  */
 
-public class User {
+/*
+*
+* 返回xml格式*/
+@XmlRootElement(name = "xmlbean")
+public class XmlBean {
     private String name;
     private int id;
+
     public String getName() {
         return name;
     }
+
+    @XmlElement
     public void setName(String name) {
         this.name = name;
     }
+
     public int getId() {
         return id;
     }
+
+    @XmlElement
     public void setId(int id) {
         this.id = id;
     }

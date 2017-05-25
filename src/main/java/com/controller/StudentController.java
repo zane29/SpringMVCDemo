@@ -19,9 +19,16 @@ import java.util.Map;
  * Date: 2017/3/27
  * Time: 12:58
  */
+
+/*
+* 这里的的接口要使用chrome的postman插件来测试，因为是postjson的字符串。
+*
+*
+* */
 @Controller
-@RequestMapping(value = "/FormHandling")
+@RequestMapping(value = "/formHandling")
 public class StudentController {
+    //http://localhost:8080/formHandling/student
     @RequestMapping(value = "/student", method = RequestMethod.GET)
     public ModelAndView student() {
         return new ModelAndView("student", "command", new Student());

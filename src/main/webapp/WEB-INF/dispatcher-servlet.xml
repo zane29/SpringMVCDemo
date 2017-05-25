@@ -13,8 +13,12 @@
     <context:component-scan base-package="com.controller"/>
     <context:component-scan base-package="com.model"/>
     <context:component-scan base-package="com.utils"/>
+
     <!-- 静态资源(js、image等)的访问 -->
     <mvc:default-servlet-handler/>
+
+    <!--<mvc:default-servlet-handler />将静态资源的处理经由Spring MVC框架交回Web应用服务器处理。而<mvc:resources />更进一步，由Spring MVC框架自己处理静态资源，并添加一些有用的附加值功能。-->
+    <!--<mvc:resources location="/resources" mapping="/resources/**"/>-->
 
     <!--ViewResolver 视图解析器-->
     <!--用于支持Servlet、JSP视图解析-->
@@ -34,6 +38,7 @@
 
 
     <!--配置数据库-->
+
     <bean id="CustomerDAOImp" class="com.dao.impl.CustomerDAOImpl">
         <property name="dataSource" ref="dataSource"/>
     </bean>
@@ -45,6 +50,14 @@
         <property name="username" value="root"/>
         <property name="password" value="123456"/>
     </bean>
+
+    <!-- 多部分文件上传 目前取消注释后有问题 -->
+    <!--<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">-->
+        <!--<property name="maxUploadSize" value="104857600" />-->
+        <!--<property name="maxInMemorySize" value="4096" />-->
+        <!--<property name="defaultEncoding" value="UTF-8"></property>-->
+    <!--</bean>-->
+
 
 
 </beans>

@@ -70,10 +70,22 @@
             <version>${spring.version}</version>
         </dependency>
 
+        <!-- Needed for XML View (with JAXB2) -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-oxm</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
             <version>1.10.1.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjrt -->
