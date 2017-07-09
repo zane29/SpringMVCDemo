@@ -27,7 +27,7 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 public class UserController {
 
-    @RequestMapping(value = "{name}", method = RequestMethod.GET)
+    @RequestMapping(value = "{name}", method = RequestMethod.GET,produces = "text/html;charset=UTF-8")
     @ResponseBody
     public User getUser(@PathVariable String name) {
         User user = new User();

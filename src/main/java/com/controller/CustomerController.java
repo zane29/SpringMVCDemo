@@ -42,7 +42,7 @@ public class CustomerController {
         return customer;//返回{"custId":1,"name":"yiibai","age":29}
     }
     //http://localhost:8080/customer/getmessage?name=zhouhaiming&sex=man&age=22
-    @RequestMapping(value = "/getmessage", method = RequestMethod.GET)
+    @RequestMapping(value = "/getmessage", method = RequestMethod.GET,produces = "text/html;charset=UTF-8")
     @ResponseBody
     public Message getmessage(@ModelAttribute("message") Message message) {
         return message;//返回{"name":"zhouhaiming","sex":"man","age":"22"}

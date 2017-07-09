@@ -60,7 +60,7 @@ public class HelloController {
 //        response.sendRedirect("http://www.baidu.com");
     }
 
-    @RequestMapping(value = "/index3", method = RequestMethod.GET)
+    @RequestMapping(value = "/index3", method = RequestMethod.GET,produces = "text/html;charset=UTF-8")
     @ResponseBody
     public Map<String, String> index3() {
         Map<String, String> map = new HashMap<String, String>();
@@ -70,7 +70,7 @@ public class HelloController {
     }
 
     // Servlet直接将HTML的字符流输出到了浏览器端，那么在SpringMVC中该如何做呢？其实在SpringMVC中我们也是可以如下实现的：
-    @RequestMapping(value = "/index4", method = RequestMethod.GET, produces = "text/html")
+    @RequestMapping(value = "/index4", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     public void getcustomer(Reader reader, Writer writer, HttpSession session) throws IOException {
         StringBuffer sbHtml = new StringBuffer();
         sbHtml.append("<!doctype html><html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">");
@@ -83,7 +83,7 @@ public class HelloController {
      * 注意：如果方法声明了注解@ResponseBody ，则会直接将返回值输出到页面。
     */
 
-    @RequestMapping(value = "/index5", method = RequestMethod.GET, produces = "text/html")
+    @RequestMapping(value = "/index5", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getcustomer2() throws IOException {
         StringBuffer sbHtml = new StringBuffer();
