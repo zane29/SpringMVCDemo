@@ -1,10 +1,9 @@
 package com.controller;
 
 import com.dao.TbCustomerRepository;
-import com.data.model.Message;
-import com.data.bean.TbCustomer;
-import com.utils.ReturnInfo;
+import com.bean.TbCustomer;
 import com.data.response.BaseResponse;
+import com.utils.ReturnInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -31,25 +30,12 @@ public class CustomerController {
     @Autowired
     TbCustomerRepository tbCustomerRepository;
 
-
-    @RequestMapping(value = "/get", method = RequestMethod.GET)//http://localhost:8080/customer/get?id=1
+    //http://localhost:8080/customer/get?id=1
+    @RequestMapping(value = "/get", method = RequestMethod.GET)
     @ResponseBody
     public TbCustomer get(@RequestParam("id") Long id) {
         TbCustomer tbCustomer = tbCustomerRepository.findById(id);
         return tbCustomer;//返回{"custId":1,"name":"yiibai","age":29}
-    }
-
-    //http://localhost:8080/customer/getmessage?name=zhouhaiming&sex=man&age=22
-    @RequestMapping(value = "/getmessage", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
-    @ResponseBody
-    public Message getmessage(@ModelAttribute("message") Message message) {
-        return message;//返回{"name":"zhouhaiming","sex":"man","age":"22"}
-    }
-
-    //http://localhost:8080/customer/getmessagepage?name=zhouhaiming&sex=man&age=22
-    @RequestMapping(value = "/getmessagepage", method = RequestMethod.GET)
-    public String getmessagepage(@ModelAttribute("message") Message message) {
-        return "message";//返回message.jps 页面
     }
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
@@ -68,6 +54,4 @@ public class CustomerController {
         responseList.add(tbCustomer);
         return ReturnInfo.genResponseEntity(ReturnInfo.SUCCESS, responseList);
     }
-
-
 }

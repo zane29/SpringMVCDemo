@@ -26,10 +26,6 @@
             <td><form:checkbox path="receivePaper"></form:checkbox></td>
         </tr>
         <tr>
-            <td><form:label path="favoriteFrameworks">喜欢的框架/技术：</form:label></td>
-            <td><form:checkboxes items="${webFrameworkList}" path="favoriteFrameworks"/></td>
-        </tr>
-        <tr>
             <td>
                 <form:label path="gender">性别</form:label></td>
             <td><form:radiobutton path="gender" value="M" label="男"/>
@@ -50,11 +46,6 @@
             <td><form:select path="country">
                 <form:option value="NONE" label="请选择..."/>
                 <form:options items="${countryList}"/></form:select></td>
-        </tr>
-        <tr>
-            <td><form:label path="skills">技术：</form:label></td>
-            <td><form:select path="skills" items="${skillsList}"
-                             multiple="true" /></td>
         </tr>
         <tr>
             <td colspan="2">

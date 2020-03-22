@@ -1,6 +1,6 @@
 package com.dao;
 
-import com.data.bean.TbCustomer;
+import com.bean.TbCustomer;
 import org.springframework.stereotype.Repository;
 
 

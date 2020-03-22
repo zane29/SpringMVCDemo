@@ -1,6 +1,6 @@
 package com.dao;
 
-import com.data.bean.TbUser;
+import com.bean.TbUser;
 import org.springframework.stereotype.Repository;
 
 
@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository;
  * Time: 13:40
  */
 @Repository
-public interface TbUserRepository extends BaseDao<TbUser, Integer> {
+public interface TbUserRepository extends BaseDao<TbUser, Long> {
 
 }

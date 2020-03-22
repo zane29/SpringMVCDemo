@@ -20,10 +20,10 @@ spring:
 #    static-locations: classpath:/META-INF/resources/,classpath:/resources/, classpath:/static/,classpath:/public/,file:${web.upload-path}
   mvc:
 #    staticPathPattern: /mvc/static/*
-#    #    表示所有的访问都经过静态资源路径；
+    #    表示所有的访问都经过静态资源路径；
 #    static-path-pattern: /**
     view:
-      prefix: /WEB-INF/views/
+      prefix: /WEB-INF/view/
       suffix: .jsp
   datasource:
     url: jdbc:mysql://localhost:3306/mvc?setUnicode=true&characterEncoding=utf8&useSSL=false&&serverTimezone=UTC
