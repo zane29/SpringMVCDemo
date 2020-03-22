@@ -17,13 +17,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping(value = "/HelloWeb")
 public class WebController {
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    @RequestMapping(value = "/toIndex", method = RequestMethod.GET)
     public String index() {
         return "index";
     }
 
     @RequestMapping(value = "/staticPage", method = RequestMethod.GET)
     public String redirect() {
-        return "redirect:/resources/final.html";//页面重定向
+        //页面重定向
+        return "redirect:/static/Snipaste.png";
     }
 }

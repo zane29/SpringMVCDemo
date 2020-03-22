@@ -1,15 +1,11 @@
 package com.controller;
 
-import com.controller.response.User;
-import com.dao.CustomerDAO;
-import com.model.Customer;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.data.bean.TbUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 
 /**
@@ -19,20 +15,21 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
  * Time: 16:19
  */
 //http://localhost:8080/user/zhouhaiming
-    /**
-    * Get请求进来带参数，返回json字符串
-    * */
+
+/**
+ * Get请求进来带参数，返回json字符串
+ */
 @Controller
 @RequestMapping("/user")
 
 public class UserController {
 
-    @RequestMapping(value = "{name}", method = RequestMethod.GET,produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = "{name}", method = RequestMethod.GET)
     @ResponseBody
-    public User getUser(@PathVariable String name) {
-        User user = new User();
-        user.setName(name);
-        user.setId(1100);
-        return user;
+    public TbUser getUser(@PathVariable String name) {
+        TbUser tbUser = new TbUser();
+        tbUser.setName(name);
+        tbUser.setId(1100L);
+        return tbUser;
     }
 }

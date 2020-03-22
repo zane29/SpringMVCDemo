@@ -1,6 +1,6 @@
 package com.controller;
 
-import com.model.Message;
+import com.data.model.Message;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

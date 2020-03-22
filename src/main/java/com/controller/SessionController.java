@@ -1,8 +1,6 @@
 package com.controller;
 
-import com.controller.response.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,7 +17,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping(value = "/session")
 public class SessionController {
-    @RequestMapping(value = "/createsession", method = RequestMethod.GET,produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = "/createsession", method = RequestMethod.GET)
     @ResponseBody
     public String CreateSession(HttpSession httpSession, HttpServletRequest req) {
         httpSession=req.getSession(false);
@@ -28,7 +26,7 @@ public class SessionController {
         return session;
     }
 
-    @RequestMapping(value = "/getsession", method = RequestMethod.GET,produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = "/getsession", method = RequestMethod.GET)
     @ResponseBody
     public String getSession(HttpSession httpSession, HttpServletRequest req) {
         httpSession=req.getSession(false);

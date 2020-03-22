@@ -6,7 +6,7 @@
 </head>
 <body>
 <%--<form:form method="POST" modelAttribute="fileUpload"--%>
-           <%--enctype="multipart/form-data">--%>
+           <%--enctype="multipart/form-com.data">--%>
     <%--请选择一个文件上传 :--%>
     <%--<input type="file" name="file" />--%>
     <%--<input type="submit" value="提交上传" />--%>

@@ -1,17 +1,16 @@
 package com.controller;
 
-import com.dao.CustomerDAO;
-import com.model.Customer;
-import com.model.Message;
+import com.dao.TbCustomerRepository;
+import com.data.model.Message;
+import com.data.bean.TbCustomer;
 import com.utils.ReturnInfo;
+import com.data.response.BaseResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -28,21 +27,20 @@ import java.util.List;
 @RequestMapping(value = "/customer")
 @Scope("prototype")//将其设置为多例模式。
 public class CustomerController {
-    @Autowired
-    Customer customer;
 
-    @Qualifier("CustomerDAOImpl")
     @Autowired
-    CustomerDAO customerDAO;
+    TbCustomerRepository tbCustomerRepository;
+
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)//http://localhost:8080/customer/get?id=1
     @ResponseBody
-    public Customer get(@RequestParam("id") int id) {
-        customer =customerDAO.findByCustomerId(id);
-        return customer;//返回{"custId":1,"name":"yiibai","age":29}
+    public TbCustomer get(@RequestParam("id") Long id) {
+        TbCustomer tbCustomer = tbCustomerRepository.findById(id);
+        return tbCustomer;//返回{"custId":1,"name":"yiibai","age":29}
     }
+
     //http://localhost:8080/customer/getmessage?name=zhouhaiming&sex=man&age=22
-    @RequestMapping(value = "/getmessage", method = RequestMethod.GET,produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = "/getmessage", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public Message getmessage(@ModelAttribute("message") Message message) {
         return message;//返回{"name":"zhouhaiming","sex":"man","age":"22"}
@@ -56,19 +54,19 @@ public class CustomerController {
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     @ResponseBody
-    public BaseResponse<List<Customer>>  insert(@RequestBody @Valid Customer customer, BindingResult result) {
+    public BaseResponse<List<TbCustomer>> insert(@RequestBody @Valid TbCustomer tbCustomer, BindingResult result) {
         if (result.hasErrors()) {
             List<ObjectError> errorList = result.getAllErrors();
             for (ObjectError error : errorList) {
-                System.out.println(error.getCode()+" msg="+ error.getDefaultMessage());
+                System.out.println(error.getCode() + " msg=" + error.getDefaultMessage());
             }
             return null;
         }
-        customerDAO.insert(customer);
-        customer =customerDAO.findByCustomerId(1);
-        List<Customer> responseList = new ArrayList<Customer>();
-        responseList.add(customer);
-        return ReturnInfo.genResponseEntity(ReturnInfo.SUCCESS,responseList);
+
+        tbCustomer = tbCustomerRepository.save(tbCustomer);
+        List<TbCustomer> responseList = new ArrayList<TbCustomer>();
+        responseList.add(tbCustomer);
+        return ReturnInfo.genResponseEntity(ReturnInfo.SUCCESS, responseList);
     }
 
 

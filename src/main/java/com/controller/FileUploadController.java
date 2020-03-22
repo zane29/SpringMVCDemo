@@ -5,7 +5,7 @@ package com.controller;
  * Email: dg_chow@163.com
  */
 
-import com.model.FileModel;
+import com.data.model.FileModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -66,7 +66,7 @@ public class FileUploadController {
         //将当前上下文初始化给  CommonsMutipartResolver （多部分解析器）
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
                 request.getSession().getServletContext());
-        //检查form中是否有enctype="multipart/form-data"
+        //检查form中是否有enctype="multipart/form-com.data"
         if (multipartResolver.isMultipart(request)) {
             //将request变成多部分request
             MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;

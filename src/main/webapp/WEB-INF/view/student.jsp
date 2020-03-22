@@ -7,7 +7,7 @@
 <body>
 
 <h2>学生信息</h2>
-<form:form method="POST" action="/formHandling/addStudent">
+<form:form method="POST" action="/mvn/formHandling/addStudent">
     <table>
         <tr>
             <td><form:label path="name">名字：</form:label></td>

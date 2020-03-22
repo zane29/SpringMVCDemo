@@ -11,7 +11,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.*;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,7 +25,7 @@ import java.util.Map;
  * Time: 9:13
  */
 @Controller
-@RequestMapping(value = "/")
+@RequestMapping(value = "/hl")
 public class HelloController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)//    http://localhost:8080/
@@ -33,62 +35,73 @@ public class HelloController {
         return "hello";
     }
 
-    /*对于ModelAndView构造函数可以指定返回页面的名称*/
-    @RequestMapping(value = "/index1", method = RequestMethod.GET)//http://localhost:8080/index1
-    public ModelAndView index() {
+    /**
+     * 对于ModelAndView构造函数可以指定返回页面的名称
+     */
+    @RequestMapping(value = "/hello1", method = RequestMethod.GET)//http://localhost:8080/hello1
+    public ModelAndView hello() {
         ModelAndView modelAndView = new ModelAndView("/hello");
         modelAndView.addObject("name", "周海明");
         return modelAndView;
     }
 
-    /*可以通过setViewName方法来设置所需要跳转的页面*/
-    //http://localhost:8080/index2
-    @RequestMapping(value = "/index2", method = RequestMethod.GET)
-    public ModelAndView index2() {
+    /**
+     * 可以通过setViewName方法来设置所需要跳转的页面
+     * <p>
+     * http://localhost:8080/hello2
+     */
+
+    @RequestMapping(value = "/hello2", method = RequestMethod.GET)
+    public ModelAndView hello2() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("name", "国迈");
-        modelAndView.addObject("msg", "我是index2跳转过来的");
+        modelAndView.addObject("msg", "我是hello2跳转过来的");
         modelAndView.setViewName("/hello");
         return modelAndView;
     }
 
-    /*在Servlet中，我们是可以直接forward或者redirecit到html页面，所以我们也可以如下在springmvc中返回到html页面*/
-    //http://localhost:8080/htmlView
+    /**
+     * 在Servlet中，我们是可以直接forward或者redirecit到html页面，所以我们也可以如下在springmvc中返回到html页面
+     * http://localhost:8080/htmlView
+     */
+
     @RequestMapping(value = "/htmlView")
     public void htmlView(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("index2").forward(request, response);
+        request.getRequestDispatcher("hello2").forward(request, response);
 //        response.sendRedirect("http://www.baidu.com");
     }
 
-    @RequestMapping(value = "/index3", method = RequestMethod.GET,produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = "/hello3", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, String> index3() {
+    public Map<String, String> hello3() {
         Map<String, String> map = new HashMap<String, String>();
         map.put("name", "周海明");
-        map.put("num", "00001");//map.put相当于request.setAttribute方法
+        map.put("num", "00001");
         return map;
     }
 
-    // Servlet直接将HTML的字符流输出到了浏览器端，那么在SpringMVC中该如何做呢？其实在SpringMVC中我们也是可以如下实现的：
-    @RequestMapping(value = "/index4", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+    /**
+     * Servlet直接将HTML的字符流输出到了浏览器端，那么在SpringMVC中该如何做呢？其实在SpringMVC中我们也是可以如下实现的：
+     */
+    @RequestMapping(value = "/hello4", method = RequestMethod.GET)
     public void getcustomer(Reader reader, Writer writer, HttpSession session) throws IOException {
-        StringBuffer sbHtml = new StringBuffer();
-        sbHtml.append("<!doctype html><html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">");
-        sbHtml.append("<title>支付宝即时到账交易接口</title></head><body>" + "123456" + "</body></html>");
-        writer.write(sbHtml.toString());
+        StringBuffer html = new StringBuffer();
+        html.append("<!doctype html><html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">");
+        html.append("<title>支付宝即时到账交易接口</title></head><body>" + "123456" + "</body></html>");
+        writer.write(html.toString());
     }
-/*
-     * String
+
+    /**
      * 指定返回的视图页面名称，结合设置的返回地址路径加上页面名称后缀即可访问到。
      * 注意：如果方法声明了注解@ResponseBody ，则会直接将返回值输出到页面。
-    */
+     */
 
-    @RequestMapping(value = "/index5", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = "/hello5", method = RequestMethod.GET)
     @ResponseBody
-    public String getcustomer2() throws IOException {
-        StringBuffer sbHtml = new StringBuffer();
-        sbHtml.append("<!doctype html><html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">");
-        sbHtml.append("<title>支付宝即时到账交易接口</title></head><body>" + "123456" + "</body></html>");
-        return sbHtml.toString();
+    public String getcustomer2() {
+        StringBuffer html = new StringBuffer();
+        html.append("<!doctype html><html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">");
+        html.append("<title>支付宝即时到账交易接口</title></head><body>" + "123456" + "</body></html>");
+        return html.toString();
     }
 }

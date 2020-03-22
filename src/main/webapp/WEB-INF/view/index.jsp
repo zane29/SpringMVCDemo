@@ -7,7 +7,7 @@
 <body>
 <h2>Spring Landing Page</h2>
 <p>点击下面的按钮获得一个简单的HTML页面</p>
-<form:form method="GET" action="/HelloWeb/staticPage">
+<form:form method="GET" action="/mvc/HelloWeb/staticPage">
     <table>
         <tr>
             <td>

@@ -1,0 +1,85 @@
+#配置默认的访问路径前缀
+server:
+  port: 8085
+  servlet:
+    contextPath: /mvc
+
+
+web:
+  upload-path: D:\MyProjects\IdeaProjects\SpringMVCDemo
+
+spring:
+  #解决中文乱码
+  http:
+    encoding:
+      force: true
+
+
+    #    在这里配置静态资源路径，前面说了这里的配置是覆盖默认配置，所以需要将默认的也加上否则static、public等这些路径将不能被当作静态资源路径，
+    #    在这个最末尾的file:${web:upload-path}之所有要加file:是因为指定的是一个具体的硬盘路径，其他的使用classpath指的是系统环境变量:
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/, classpath:/static/,classpath:/public/,file:${web.upload-path}
+  mvc:
+    staticPathPattern: /mvc/static/*
+    #    表示所有的访问都经过静态资源路径；
+    static-path-pattern: /**
+    view:
+      prefix: /WEB-INF/view/
+      suffix: .jsp
+  datasource:
+    url: jdbc:mysql://localhost:3306/mvc?setUnicode=true&characterEncoding=utf8&useSSL=false&&serverTimezone=UTC
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    #Hikari连接池配置
+    hikari:
+      # 最小空闲连接数量
+      minimum-idle: 5
+      # 空闲连接存活最大时间，默认600000（10分钟）
+      idle-timeout: 180000
+      # 连接池最大连接数，默认是10
+      maximum-pool-size: 10
+      # 此属性控制从池返回的连接的默认自动提交行为,默认值：true
+      auto-commit: true
+      # 连接池名称
+      pool-name: MyHikariCP
+      # 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
+      max-lifetime: 1800000
+      # 数据库连接超时时间,默认30秒，即30000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+
+  jpa:
+    # 配置 DBMS 类型
+    database: MYSQL
+    # 配置是否将执行的 SQL 输出到日志
+    show-sql: true
+    properties:
+      hibernate:
+        hbm2ddl:
+          # 配置开启自动更新表结构
+          auto: update
+
+  # 配置日志输出
+  filter:
+    slf4j:
+      enabled: true
+      statement-create-after-log-enabled: false
+      statement-close-after-log-enabled: false
+      result-set-open-after-log-enabled: false
+      result-set-close-after-log-enabled: false
+
+#日志相关配置
+logging:
+  level:
+    root: INFO
+    org:
+      springframework:
+        web: DEBUG
+      hibernate: ERROR
+  file:
+    path: /logs
+
+
+

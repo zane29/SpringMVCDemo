@@ -20,7 +20,7 @@
 <body>
 
 <h2>学生信息</h2>
-<form:form method="POST" action="/addMessage" commandName="Message">
+<form:form method="POST" action="/mvn/addMessage" commandName="Message">
     <form:errors path="*" cssClass="errorblock" element="div" />
     <table>
         <tr>
